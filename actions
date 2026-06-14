@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+source rofi_env
+
 # Cores para mensagens de erro/ajuda
 VERMELHO="\033[0;31m"
 AMARELO="\033[0;33m"
@@ -24,16 +26,16 @@ fi
 # Avalia o primeiro parâmetro passado ($1)
 case "$1" in
     --clipboard)
-        cliphist-rofi
+        $ROFI_DIR/cliphist-rofi
         ;;
     --wall)
-        wallset
+        $ROFI_DIR/wallset
         ;;
     --rofi)
-        launcher-rofi
+        $ROFI_DIR/launcher-rofi
         ;;
     --power)
-        powermenu
+        $ROFI_DIR/powermenu
         ;;
     *)
         # Se o parâmetro não coincidir com nenhum dos acima

@@ -4,4 +4,4 @@
 source rofi_env
 
 # Executa o rofi com o tema definido na variável $THEME
-rofi -show drun -theme "$THEME"
+rofi -show drun -theme "$ROFI_THEME"

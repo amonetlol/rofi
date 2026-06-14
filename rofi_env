@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 # ----- Folder ----- #
-ROFI_DIR="~/.config/rofi"
+ROFI_DIR="$HOME/.config/rofi"
 WALLPAPER_DIR="~/Imagens/wallpapers"
 SCREENSHOT_DIR="~/Imagens/screenshots"
 
