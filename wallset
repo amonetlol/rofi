@@ -5,7 +5,12 @@ wallpaper_dir="$HOME/Imagens/wallpapers/"
 THEME="$HOME/.config/rofi/expanded-grid.rasi"
 #THEME="~/.src/wallset/grid.rasi"
 
-
+# --- VERIFICAÇÃO DA PASTA ---
+# Se a pasta não existir (! -d), cria ela e todas as pastas pai necessárias (-p)
+if [ ! -d "$wallpaper_dir" ]; then
+    mkdir -p "$wallpaper_dir"
+fi
+# ----------------------------
 
 # Current directory
 cwd="$(pwd)"
