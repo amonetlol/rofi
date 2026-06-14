@@ -12,7 +12,8 @@ SCRIPTS=(
     "install_fonts"    
     "wallset"
     "walset-backend"
-    "launcher-rofi"    
+    "launcher-rofi"
+    "actions"    
 )
 
 echo -e "${AMARELO}Aplicando permissões de execução...${SEM_COR}"
