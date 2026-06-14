@@ -3,7 +3,7 @@
 # Directory containing the wallpapers
 wallpaper_dir="$HOME/Imagens/wallpapers/"
 THEME="$HOME/.config/rofi/expanded-grid.rasi"
-#THEME="~/.src/wallset/grid.rasi"
+#THEME="$HOME/.config/rofi/grid.rasi"
 
 # --- VERIFICAÇÃO DA PASTA ---
 # Se a pasta não existir (! -d), cria ela e todas as pastas pai necessárias (-p)

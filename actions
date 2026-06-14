@@ -1,0 +1,185 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+# ============================================================
+# Waybar Actions
+# Centralizador de comandos usados pela Waybar
+# ============================================================
+
+# Apps
+BROWSER="firefox"
+BROWSER_ALT="google-chrome-stable"
+
+TERMINAL="foot"
+TERMINAL_ALT="kitty"
+TERMINAL_ALT_2="alacritty"
+
+FILE_MANAGER="thunar"
+FILE_MANAGER_ALT="nautilus"
+
+# Rofi / Menus
+ROFI="$HOME/.config/rofi/launcher.sh"
+WALL_PICKER="$HOME/.config/rofi/wall-picker.sh"
+POWERMENU="$HOME/.config/rofi/powermenu.sh"
+CLIPBOARD="$HOME/.config/rofi/clipboard.sh"
+
+# Waybar
+WAYBAR_CONFIG="$HOME/.config/waybar/config.jsonc"
+WAYBAR_STYLE="$HOME/.config/waybar/style.css"
+
+
+run_cmd() {
+    local cmd="$1"
+
+    if ! command -v "$cmd" >/dev/null 2>&1; then
+        notify-send "Waybar Actions" "Comando não encontrado: $cmd"
+        exit 1
+    fi
+
+    exec "$cmd"
+}
+
+
+run_script() {
+    local script="$1"
+
+    if [[ ! -f "$script" ]]; then
+        notify-send "Waybar Actions" "Arquivo não encontrado: $script"
+        exit 1
+    fi
+
+    if [[ ! -x "$script" ]]; then
+        chmod +x "$script"
+    fi
+
+    exec "$script"
+}
+
+
+run_waybar() {
+    if [[ ! -f "$WAYBAR_CONFIG" ]]; then
+        notify-send "Waybar Actions" "Config não encontrada: $WAYBAR_CONFIG"
+        exit 1
+    fi
+
+    if [[ ! -f "$WAYBAR_STYLE" ]]; then
+        notify-send "Waybar Actions" "Style não encontrado: $WAYBAR_STYLE"
+        exit 1
+    fi
+
+    pkill waybar 2>/dev/null || true
+
+    exec waybar -c "$WAYBAR_CONFIG" -s "$WAYBAR_STYLE"
+}
+
+
+show_help() {
+    cat <<EOF
+Uso:
+  actions [opção]
+
+Aplicativos:
+  --browser        Executa o navegador principal
+  --browser-alt    Executa o navegador alternativo
+  --terminal       Executa o terminal principal
+  --terminal-alt   Executa o terminal alternativo
+  --terminal-alt_2 Executa o terminal alternativo_2
+  --file           Executa o gerenciador de arquivos principal
+  --file-alt       Executa o gerenciador de arquivos alternativo
+
+Rofi / Menus:
+  --rofi           Executa o launcher do Rofi
+  --wall           Executa o seletor de wallpaper
+  --power          Executa o powermenu
+  --clipboard      Executa o menu de clipboard
+
+Waybar:
+  --waybar         Reinicia a Waybar usando config e style definidos
+
+Caminhos:
+  --rofi       -> $ROFI
+  --wall       -> $WALL_PICKER
+  --power      -> $POWERMENU
+  --clipboard  -> $CLIPBOARD
+
+Waybar:
+  config       -> $WAYBAR_CONFIG
+  style        -> $WAYBAR_STYLE
+
+Apps:
+  browser         -> $BROWSER
+  browser-alt     -> $BROWSER_ALT
+  terminal        -> $TERMINAL
+  terminal-alt    -> $TERMINAL_ALT
+  terminal-alt_2  -> $TERMINAL_ALT_2
+  file            -> $FILE_MANAGER
+  file-alt        -> $FILE_MANAGER_ALT
+EOF
+}
+
+
+case "${1:-}" in
+    # Apps
+    --browser)
+        run_cmd "$BROWSER"
+        ;;
+
+    --browser-alt)
+        run_cmd "$BROWSER_ALT"
+        ;;
+
+    --terminal)
+        run_cmd "$TERMINAL"
+        ;;
+
+    --terminal-alt)
+        run_cmd "$TERMINAL_ALT"
+        ;;
+
+    --terminal-alt_2)
+        run_cmd "$TERMINAL_ALT_2"
+        ;;
+
+    --file)
+        run_cmd "$FILE_MANAGER"
+        ;;
+
+    --file-alt)
+        run_cmd "$FILE_MANAGER_ALT"
+        ;;
+
+    # Rofi / Menus
+    --rofi)
+        run_script "$ROFI"
+        ;;
+
+    --wall)
+        run_script "$WALL_PICKER"
+        ;;
+
+    --power)
+        run_script "$POWERMENU"
+        ;;
+
+    --clipboard)
+        run_script "$CLIPBOARD"
+        ;;
+
+    # Waybar
+    --waybar)
+        run_waybar
+        ;;
+
+    # Help
+    --help|-h|"")
+        show_help
+        ;;
+
+    *)
+        notify-send "Actions" "Opção inválida: $1"
+        echo "Opção inválida: $1"
+        echo "Use: actions --help"
+        exit 1
+        ;;
+esac
