@@ -1,13 +1,8 @@
 #!/usr/bin/env bash
 
-# import ENV
-source rofi_env
-
 # Directory containing the wallpapers
-wallpaper_dir="$WALLPAPER_DIR/"
-THEME="$WALL_THEME"
-#wallpaper_dir="$HOME/Imagens/wallpapers/"
-#THEME="~/.src/wallset/expanded-grid.rasi"
+wallpaper_dir="$HOME/Imagens/wallpapers/"
+THEME="$HOME/.config/rofi/expanded-grid.rasi"
 #THEME="~/.src/wallset/grid.rasi"
 
 

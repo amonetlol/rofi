@@ -1,7 +1,6 @@
 #!/usr/bin/env bash
 
-# Import env
-source rofi_env
+ROFI_THEME="$HOME/.config/rofi/minimal.rasi"
 
 # Executa o rofi com o tema definido na variável $THEME
 rofi -show drun -theme "$ROFI_THEME"

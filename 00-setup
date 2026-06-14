@@ -9,12 +9,10 @@ SEM_COR="\033[0m"
 # Lista dos scripts que precisam de permissão de execução
 SCRIPTS=(
     "cliphist-rofi"
-    "install_fonts"
-    "rofi_env"
+    "install_fonts"    
     "wallset"
     "walset-backend"
-    "launcher-rofi"
-    "actions"
+    "launcher-rofi"    
 )
 
 echo -e "${AMARELO}Aplicando permissões de execução...${SEM_COR}"

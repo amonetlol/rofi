@@ -1,14 +1,10 @@
 #!/usr/bin/env bash
 
-# import ENV
-source rofi_env
-
 # This script is needed to get the clipboard history from cliphist and display it in rofi with thumbnails for image items. When an item is selected, it is decoded and copied to the clipboard using wl-copy.
 
 thumbnail_dir="${XDG_CACHE_HOME:-$HOME/.cache}/cliphist/thumbnails"
 cliphist_list=$(cliphist list)
-#THEME='clipboard.rasi'
-THEME="$CLIPBOARD_THEME"
+THEME='$HOME/.config/rofi/clipboard.rasi'
 
 if [ -z "$cliphist_list" ]; then
     exit 0
