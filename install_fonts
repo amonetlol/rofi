@@ -1,0 +1,31 @@
+#!/usr/bin/env bash
+
+# Define a cor verde para o texto de sucesso e reseta a cor no final
+VERDE="\033[0;32m"
+SEM_COR="\033[0m"
+VERMELHO="\033[0;31m"
+
+TARGET_DIR="$HOME/.fonts"
+SOURCE_DIR="$PWD/fonts"
+
+# Verifica se a pasta 'fonts' existe no diretório atual antes de continuar
+if [ ! -d "$SOURCE_DIR" ]; then
+    echo -e "${VERMELHO}Erro: A pasta '$SOURCE_DIR' não existe no diretório atual.${SEM_COR}"
+    exit 1
+fi
+
+# Verifica se a pasta ~/.fonts existe, senão existir, cria
+if [ ! -d "$TARGET_DIR" ]; then
+    mkdir -p "$TARGET_DIR"
+fi
+
+# Copia o conteúdo para ~/.fonts
+# Nota: O uso de cp -r garante que se houver subpastas organizadas por família, elas também sejam copiadas
+cp -r "$SOURCE_DIR"/* "$TARGET_DIR"/
+
+# Atualiza o cache de fontes do sistema de forma silenciosa ou use -vf se quiser ver o log completo
+# Mudei para fc-cache -f para não poluir o terminal, mas você pode voltar para -vf se preferir acompanhar o verbose
+fc-cache -f
+
+# Mensagem de sucesso em verde
+echo -e "${VERDE}Fontes instaladas com sucesso!${SEM_COR}"

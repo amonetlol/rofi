@@ -1,0 +1,38 @@
+#!/usr/bin/env bash
+
+# Cores para o terminal
+VERDE="\033[0;32m"
+AMARELO="\033[0;33m"
+VERMELHO="\033[0;31m"
+SEM_COR="\033[0m"
+
+# Lista dos scripts que precisam de permissão de execução
+SCRIPTS=(
+    "cliphist"
+    "install_fonts"
+    "rofi_env"
+    "wallset"
+    "walset_backend"
+)
+
+echo -e "${AMARELO}Aplicando permissões de execução...${SEM_COR}"
+
+# Loop para aplicar o chmod +x em cada arquivo da lista
+for script in "${SCRIPTS[@]}"; do
+    if [ -f "$script" ]; then
+        chmod +x "$script"
+        echo "  [+] Permissão concedida para: $script"
+    else
+        echo -e "  ${VERMELHO}[-] Arquivo não encontrado: $script${SEM_COR}"
+    fi
+done
+
+echo -e "\n${AMARELO}Executando o instalador de fontes...${SEM_COR}"
+
+# Executa o script de fontes se ele existir no diretório atual
+if [ -f "./install_fonts" ]; then
+    ./install_fonts
+else
+    echo -e "${VERMELHO}Erro: O script './install_fonts' não foi encontrado para execução.${SEM_COR}"
+    exit 1
+fi
