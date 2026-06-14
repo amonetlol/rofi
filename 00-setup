@@ -13,6 +13,7 @@ SCRIPTS=(
     "rofi_env"
     "wallset"
     "walset_backend"
+    "launcher-rofi"
 )
 
 echo -e "${AMARELO}Aplicando permissões de execução...${SEM_COR}"

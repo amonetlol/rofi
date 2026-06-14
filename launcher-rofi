@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+
+# Import env
+source rofi_env
+
+# Executa o rofi com o tema definido na variável $THEME
+rofi -show drun -theme "$THEME"

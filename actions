@@ -1,0 +1,44 @@
+#!/usr/bin/env bash
+
+# Cores para mensagens de erro/ajuda
+VERMELHO="\033[0;31m"
+AMARELO="\033[0;33m"
+SEM_COR="\033[0m"
+
+# Função para exibir as opções disponíveis caso o usuário erre o parâmetro
+exibir_ajuda() {
+    echo -e "${AMARELO}Uso: $0 [parâmetro]${SEM_COR}"
+    echo "Parâmetros disponíveis:"
+    echo "  --clipboard   Executa o cliphist-rofi"
+    echo "  --wall        Executa o wallset"
+    echo "  --rofi        Executa o launcher-rofi"
+    echo "  --power       Executa o powermenu"
+}
+
+# Verifica se nenhum parâmetro foi passado
+if [ -z "$1" ]; then
+    exibir_ajuda
+    exit 1
+fi
+
+# Avalia o primeiro parâmetro passado ($1)
+case "$1" in
+    --clipboard)
+        cliphist-rofi
+        ;;
+    --wall)
+        wallset
+        ;;
+    --rofi)
+        launcher-rofi
+        ;;
+    --power)
+        powermenu
+        ;;
+    *)
+        # Se o parâmetro não coincidir com nenhum dos acima
+        echo -e "${VERMELHO}Erro: Parâmetro inválido '$1'${SEM_COR}\n"
+        exibir_ajuda
+        exit 1
+        ;;
+esac
