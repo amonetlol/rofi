@@ -1,0 +1,12 @@
+#!/usr/bin/env bash
+
+# ----- Folder ----- #
+ROFI_DIR="~/.config/rofi"
+WALLPAPER_DIR="~/Imagens/wallpapers"
+SCREENSHOT_DIR="~/Imagens/screenshots"
+
+# ----- Theme ----- #
+ROFI_THEME="$ROFI_DIR/minimal.rasi"
+WALL_THEME="$ROFI_DIR/expanded-grid.rasi"
+CLIPBOARD_THEME="$ROFI_DIR/clipboard.rasi"
+POWERMENU_THEME="$ROFI_DIR/powermenu.rasi"

@@ -1,0 +1,36 @@
+#!/usr/bin/env bash
+
+# import ENV
+source rofi_env
+
+# Directory containing the wallpapers
+wallpaper_dir="$WALLPAPER_DIR/"
+THEME="$WALL_THEME"
+#wallpaper_dir="$HOME/Imagens/wallpapers/"
+#THEME="~/.src/wallset/expanded-grid.rasi"
+#THEME="~/.src/wallset/grid.rasi"
+
+
+
+# Current directory
+cwd="$(pwd)"
+
+cd "$wallpaper_dir" || exit 1
+
+IFS=$'\n' # Set IFS to newline to handle filenames with spaces
+
+# Get the selected wallpaper using rofi
+selected_wallpaper=$(for a in *.jpg *.png *.jpeg; do echo -en "$a\0icon\x1f$a\n"; done | rofi -dmenu -p "Select" -theme "$THEME") 
+
+# Script to matugen
+#if [ -n "$selected_wallpaper" ]; then
+#    walset-backend "$selected_wallpaper"
+#fi
+
+# Set wallpaper
+if [ -n "$selected_wallpaper" ]; then
+  awww img "$selected_wallpaper" --transition-type grow --transition-fps 60
+fi
+
+# Go back to the original directory
+cd "$cwd" || exit 1

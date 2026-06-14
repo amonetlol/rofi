@@ -1,0 +1,7 @@
+# Armazena texto
+exec-once = wl-paste --type text --watch cliphist store
+
+# Armazena imagens (opcional)
+exec-once = wl-paste --type image --watch cliphist store
+
+yin apple-fonts
